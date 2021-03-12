@@ -10,6 +10,8 @@ class App extends React.Component {
 			data2: '',
 		};
 
+		this.myTextInput = React.createRef();
+
 		// this.setStateHandler = this.setStateHandler.bind(this);
 	}
 
@@ -35,10 +37,17 @@ class App extends React.Component {
 	updateState = (e) => {
 		this.setState({ data2: e.target.value });
 	};
+
 	clearInput = () => {
 		this.setState({ data2: '' });
-		ReactDOM.findDOMNode(this.refs.myInput).focus();
+		// ReactDOM.findDOMNode(this.refs.myInput).focus();
+
+		this.myTextInput.current.focus();
 	};
+
+	componentDidMount() {
+		this.myTextInput.current.focus();
+	}
 
 	render() {
 		return (
@@ -56,7 +65,7 @@ class App extends React.Component {
 				<input
 					value={this.state.data2}
 					onChange={this.updateState}
-					ref='myInput'
+					ref={this.myTextInput}
 				></input>
 				<button onClick={this.clearInput}>CLEAR</button>
 				<h4>{this.state.data}</h4>
